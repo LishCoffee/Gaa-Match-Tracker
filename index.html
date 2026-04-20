@@ -265,29 +265,22 @@ function save() {
 }
 
   function load() {
-  const raw = localStorage.getItem("gaaApp");
-  if (!raw) return;
+  let data = JSON.parse(localStorage.getItem("gaaApp"));
+  if (data) {
+    score = data.score;
+    history = data.history || [];
+    seconds = data.seconds || 0;
+    half = data.half || 1;
 
-  let data;
-  try {
-    data = JSON.parse(raw);
-  } catch (e) {
-    console.log("Bad save data cleared");
-    localStorage.removeItem("gaaApp");
-    return;
+    document.getElementById("teamAName").value = data.teamA || "";
+    document.getElementById("teamBName").value = data.teamB || "";
+
+    document.getElementById("half").innerText =
+      half === 1 ? "First Half" : "Second Half";
+
+    updateDisplay();
+    updateTimer();
   }
-
-  score = data.score || score;
-  history = data.history || [];
-  seconds = data.seconds || 0;
-  half = data.half || 1;
-
-  document.getElementById("teamAName").value = data.teamA || "";
-  document.getElementById("teamBName").value = data.teamB || "";
-
-  updateDisplay();
-  updateTimer();
-}
 
 }
 
