@@ -1,0 +1,175 @@
+<!<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAA Match Tracker</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #0b3d2e;
+    color: white;
+  }
+
+  header {
+    text-align: center;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    background: #06251c;
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  .teams {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .team {
+    background: #145c43;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+
+  .team h2 {
+    margin: 0 0 10px;
+    text-align: center;
+  }
+
+  .score {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .buttons {
+    display: flex;
+    gap: 10px;
+  }
+
+  button {
+    flex: 1;
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .goal {
+    background: #ff5252;
+    color: white;
+  }
+
+  .point {
+    background: #ffd166;
+    color: black;
+  }
+
+  .reset {
+    width: 100%;
+    margin-top: 15px;
+    background: #333;
+    color: white;
+  }
+
+  #log {
+    margin-top: 15px;
+    background: white;
+    color: black;
+    border-radius: 10px;
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    font-size: 14px;
+  }
+</style>
+</head>
+
+<body>
+
+<header>GAA Match Tracker</header>
+
+<div class="container">
+
+  <div class="teams">
+
+    <div class="team">
+      <h2 id="teamAName">Team A</h2>
+      <div class="score" id="scoreA">0-0 (0)</div>
+      <div class="buttons">
+        <button class="goal" onclick="addScore('A','goal')">Goal</button>
+        <button class="point" onclick="addScore('A','point')">Point</button>
+      </div>
+    </div>
+
+    <div class="team">
+      <h2 id="teamBName">Team B</h2>
+      <div class="score" id="scoreB">0-0 (0)</div>
+      <div class="buttons">
+        <button class="goal" onclick="addScore('B','goal')">Goal</button>
+        <button class="point" onclick="addScore('B','point')">Point</button>
+      </div>
+    </div>
+
+  </div>
+
+  <button class="reset" onclick="resetMatch()">Reset Match</button>
+
+  <div id="log"></div>
+
+</div>
+
+<script>
+let score = {
+  A: { goals: 0, points: 0 },
+  B: { goals: 0, points: 0 }
+};
+
+function addScore(team, type) {
+  if (type === 'goal') {
+    score[team].goals++;
+    logEvent(team + " GOAL!");
+  } else {
+    score[team].points++;
+    logEvent(team + " point");
+  }
+  updateDisplay();
+}
+
+function updateDisplay() {
+  let aTotal = score.A.goals * 3 + score.A.points;
+  let bTotal = score.B.goals * 3 + score.B.points;
+
+  document.getElementById("scoreA").innerText =
+    `${score.A.goals}-${score.A.points} (${aTotal})`;
+
+  document.getElementById("scoreB").innerText =
+    `${score.B.goals}-${score.B.points} (${bTotal})`;
+}
+
+function logEvent(text) {
+  let log = document.getElementById("log");
+  let time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+  log.innerHTML = `<div>[${time}] ${text}</div>` + log.innerHTML;
+}
+
+function resetMatch() {
+  score = {
+    A: { goals: 0, points: 0 },
+    B: { goals: 0, points: 0 }
+  };
+  document.getElementById("log").innerHTML = "";
+  updateDisplay();
+}
+</script>
+
+</body>
+</html>
