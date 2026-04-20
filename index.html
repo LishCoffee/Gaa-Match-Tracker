@@ -264,22 +264,30 @@ function save() {
   }));
 }
 
-function load() {
+  function load() {
   let data = JSON.parse(localStorage.getItem("gaaApp"));
-  if (data) {
-    score = data.score;
-    history = data.history || [];
-    seconds = data.seconds || 0;
-    half = data.half || 1;
 
-    document.getElementById("teamAName").value = data.teamA || "";
-    document.getElementById("teamBName").value = data.teamB || "";
+  if (!data) return;
 
-    document.getElementById("half").innerText =
-      half === 1 ? "First Half" : "Second Half";
+  score = data.score || score;
+  history = data.history || [];
+  seconds = data.seconds || 0;
+  half = data.half || 1;
 
-    updateDisplay();
-    updateTimer();
+  document.getElementById("teamAName").value = data.teamA || "";
+  document.getElementById("teamBName").value = data.teamB || "";
+
+  updateDisplay();
+  updateTimer();
+}
+
+// run once only
+if (!window.__gaa_loaded) {
+  load();
+  window.__gaa_loaded = true;
+}
+
+
   }
 }
 
