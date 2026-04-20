@@ -265,9 +265,17 @@ function save() {
 }
 
   function load() {
-  let data = JSON.parse(localStorage.getItem("gaaApp"));
+  const raw = localStorage.getItem("gaaApp");
+  if (!raw) return;
 
-  if (!data) return;
+  let data;
+  try {
+    data = JSON.parse(raw);
+  } catch (e) {
+    console.log("Bad save data cleared");
+    localStorage.removeItem("gaaApp");
+    return;
+  }
 
   score = data.score || score;
   history = data.history || [];
@@ -279,12 +287,6 @@ function save() {
 
   updateDisplay();
   updateTimer();
-}
-
-// run once only
-if (!window.__gaa_loaded) {
-  load();
-  window.__gaa_loaded = true;
 }
 
 
