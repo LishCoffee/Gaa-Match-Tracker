@@ -1,4 +1,4 @@
-<!<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -15,37 +15,237 @@
 
   header {
     text-align: center;
-    padding: 15px;
-    font-size: 20px;
-    font-weight: bold;
+    padding: 10px;
     background: #06251c;
+  }
+
+  input {
+    width: 45%;
+    padding: 8px;
+    margin: 5px;
+    border-radius: 8px;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .timer {
+    font-size: 24px;
+    margin: 5px 0;
+  }
+
+  .controls button {
+    margin: 5px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
   }
 
   .container {
     padding: 10px;
   }
 
-  .teams {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-
   .team {
     background: #145c43;
     border-radius: 15px;
     padding: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  }
-
-  .team h2 {
-    margin: 0 0 10px;
-    text-align: center;
+    margin-bottom: 10px;
   }
 
   .score {
     text-align: center;
     font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .buttons {
+    display: flex;
+    gap: 10px;
+  }
+
+  button {
+    flex: 1;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .goal { background: #ff5252; color: white; }
+  .point { background: #ffd166; color: black; }
+  .undo { background: orange; }
+  .reset { background: #333; color: white; width: 100%; }
+
+  #log {
+    background: white;
+    color: black;
+    border-radius: 10px;
+    padding: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+    font-size: 14px;
+  }
+</style>
+</head>
+
+<body>
+
+<header>
+  <input id="teamAName" placeholder="Team A">
+  <input id="teamBName" placeholder="Team B">
+
+  <div class="timer" id="timer">00:00</div>
+
+  <div class="controls">
+    <button onclick="startTimer()">Start</button>
+    <button onclick="pauseTimer()">Pause</button>
+    <button onclick="resetTimer()">Reset</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="team">
+    <div class="score" id="scoreA">0-0 (0)</div>
+    <div class="buttons">
+      <button class="goal" onclick="addScore('A','goal')">Goal</button>
+      <button class="point" onclick="addScore('A','point')">Point</button>
+    </div>
+  </div>
+
+  <div class="team">
+    <div class="score" id="scoreB">0-0 (0)</div>
+    <div class="buttons">
+      <button class="goal" onclick="addScore('B','goal')">Goal</button>
+      <button class="point" onclick="addScore('B','point')">Point</button>
+    </div>
+  </div>
+
+  <button class="undo" onclick="undo()">Undo Last Action</button>
+  <button class="reset" onclick="resetMatch()">Reset Match</button>
+
+  <div id="log"></div>
+
+</div>
+
+<script>
+let score = { A:{goals:0,points:0}, B:{goals:0,points:0} };
+let history = [];
+
+// TIMER
+let seconds = 0;
+let interval = null;
+
+function updateTimer() {
+  let mins = String(Math.floor(seconds / 60)).padStart(2,'0');
+  let secs = String(seconds % 60).padStart(2,'0');
+  document.getElementById("timer").innerText = `${mins}:${secs}`;
+}
+
+function startTimer() {
+  if (!interval) {
+    interval = setInterval(() => {
+      seconds++;
+      updateTimer();
+      save();
+    }, 1000);
+  }
+}
+
+function pauseTimer() {
+  clearInterval(interval);
+  interval = null;
+}
+
+function resetTimer() {
+  pauseTimer();
+  seconds = 0;
+  updateTimer();
+  save();
+}
+
+// SCORE
+function addScore(team, type) {
+  history.push(JSON.parse(JSON.stringify(score)));
+
+  if (type === 'goal') score[team].goals++;
+  else score[team].points++;
+
+  logEvent(`${getTeamName(team)} ${type}`);
+  updateDisplay();
+  save();
+}
+
+function updateDisplay() {
+  let aTotal = score.A.goals*3 + score.A.points;
+  let bTotal = score.B.goals*3 + score.B.points;
+
+  document.getElementById("scoreA").innerText =
+    `${score.A.goals}-${score.A.points} (${aTotal})`;
+
+  document.getElementById("scoreB").innerText =
+    `${score.B.goals}-${score.B.points} (${bTotal})`;
+}
+
+// UNDO
+function undo() {
+  if (history.length > 0) {
+    score = history.pop();
+    updateDisplay();
+    logEvent("Undo");
+    save();
+  }
+}
+
+// LOG
+function logEvent(text) {
+  let log = document.getElementById("log");
+  let time = document.getElementById("timer").innerText;
+  log.innerHTML = `<div>[${time}] ${text}</div>` + log.innerHTML;
+}
+
+// TEAM NAMES
+function getTeamName(team) {
+  return document.getElementById(team === 'A' ? "teamAName" : "teamBName").value || `Team ${team}`;
+}
+
+// RESET
+function resetMatch() {
+  score = { A:{goals:0,points:0}, B:{goals:0,points:0} };
+  history = [];
+  document.getElementById("log").innerHTML = "";
+  updateDisplay();
+  resetTimer();
+  save();
+}
+
+// SAVE / LOAD
+function save() {
+  localStorage.setItem("gaaApp", JSON.stringify({
+    score, history, seconds,
+    teamA: document.getElementById("teamAName").value,
+    teamB: document.getElementById("teamBName").value
+  }));
+}
+
+function load() {
+  let data = JSON.parse(localStorage.getItem("gaaApp"));
+  if (data) {
+    score = data.score;
+    history = data.history || [];
+    seconds = data.seconds || 0;
+    document.getElementById("teamAName").value = data.teamA || "";
+    document.getElementById("teamBName").value = data.teamB || "";
+    updateDisplay();
+    updateTimer();
+  }
+}
+
+load();
+</script>
+
+</body>
+</html>    font-size: 22px;
     margin-bottom: 10px;
   }
 
