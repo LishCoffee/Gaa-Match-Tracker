@@ -15,52 +15,33 @@
 
   /* RTÉ SCOREBOARD */ 
   .scoreboard {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   background: #002a80;
-  padding: 6px 8px; /* smaller padding */
   border-bottom: 3px solid #ffcc00;
-}
-
-.team-side {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  width: 25%;
-}
-
-.team-name {
-  font-size: 12px; /* smaller text */
-  font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.logo {
-  width: 20px; /* smaller logo */
-  height: 20px;
-  border-radius: 50%;
-}
-
-.score-center {
+  padding: 10px;
   text-align: center;
-  width: 50%;
+}
+
+.teams-line {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.vs {
+  margin: 0 6px;
+  opacity: 0.7;
 }
 
 .score-line {
-  font-size: 22px; /* reduced from big size */
+  font-size: 34px; /* 🔥 BIG score */
   font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
 }
 
 .match-info {
-  font-size: 11px;
+  font-size: 13px;
   color: #ffcc00;
-}
-
-.dash {
-  margin: 0 4px;
 }
 
   #timer { 
@@ -86,7 +67,7 @@
     margin: 5px; 
     border-radius: 8px; 
     border: none; 
-    text-align: center; 
+    text-a8lign: center; 
     font-size: 16px; 
   } 
 
@@ -150,19 +131,26 @@
 <body> 
 
 <!-- RTÉ SCOREBOARD --> 
-<div class="scoreboard"> 
+<div class="scoreboard">
 
-  <div class="team-side"> 
-    <img src="tullylish.png" class="logo"> 
-    <span>Tullylish</span> 
-  </div> 
+  <div class="teams-line">
+    <span class="team-name">Tullylish</span>
+    <span class="vs">v</span>
+    <span id="teamBNameDisplay" class="team-name">Team B</span>
+  </div>
 
-  <div class="score-middle"> 
-    <span id="scoreA">0-0</span> 
-    <span id="timer">00:00</span> 
-    <span class="dash">-</span> 
-    <span id="scoreB">0-0</span> 
-  </div> 
+  <div class="score-line">
+    <span id="scoreA">0-0 (0)</span>
+    <span class="dash">-</span>
+    <span id="scoreB">0-0 (0)</span>
+  </div>
+
+  <div class="match-info">
+    <span id="timer">00:00</span>
+    <span id="halfDisplay">1H</span>
+  </div>
+
+</div>
 
   <div class="team-side"> 
     <span id="teamBNameDisplay">Team B</span> 
@@ -271,6 +259,10 @@ function updateDisplay() {
 
   document.getElementById("teamBNameDisplay").innerText =
     getTeamB();
+  
+  document.getElementById("halfDisplay").innerText =
+  half === 1 ? "1H" : "2H";
+  
 }
 
 function getTeamB() { 
