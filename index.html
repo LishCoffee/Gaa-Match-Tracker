@@ -320,8 +320,10 @@ function addScore(team, type) {
   logEvent(name + " " + type); 
 } 
 
-  updateDisplay(); 
-  logEvent(`${team === 'A' ? 'Tullylish' : getTeamB()} ${type}`); 
+
+function formatScore(t) { 
+  let total = t.goals * 3 + t.points; 
+  return `${t.goals}-${t.points} (${total})`; 
 } 
 
   
