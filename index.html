@@ -275,7 +275,9 @@ function logEvent(text) {
   let log = document.getElementById("log"); 
   let time = document.getElementById("timer").innerText; 
 
-  log.innerHTML = `<div>[${time}] ${text}</div>` + log.innerHTML; 
+  let period - half === 1 ? "1H" : "2H";
+
+  log.innerHTML = `<div>[${time} &{period}] ${text}</div>` + log.innerHTML; 
 } 
 
 // RESET MATCH 
