@@ -6,114 +6,133 @@
 <title>GAA Match Tracker</title> 
 
 <style> 
-body { 
-  margin: 0; 
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif; 
-  background: #0033a0; 
-  color: white; 
-} 
+  body { 
+    margin: 0; 
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif; 
+    background: #0033a0; 
+    color: white; 
+  } 
 
-/* SCOREBOARD */ 
-.scoreboard { 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  background: #002a80; 
-  padding: 12px; 
-  border-bottom: 3px solid #ffcc00; 
-  font-weight: bold; 
-} 
+  /* RTÉ SCOREBOARD */ 
+  .scoreboard { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    background: #002a80; 
+    padding: 12px; 
+    border-bottom: 3px solid #ffcc00; 
+    font-weight: bold; 
+  } 
 
-.team-side { 
-  display: flex; 
-  align-items: center; 
-  gap: 6px; 
-} 
+  .team-side { 
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+    font-size: 14px; 
+  } 
 
-.logo { 
-  width: 26px; 
-  height: 26px; 
-  border-radius: 50%; 
-} 
+  .logo { 
+    width: 26px; 
+    height: 26px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+  } 
 
-.score-middle { 
-  font-size: 26px; 
-} 
+  .score-middle { 
+    font-size: 26px; 
+    letter-spacing: 2px; 
+    color: white; 
+  } 
 
-#timer { 
-  font-size: 14px; 
-  color: #ffcc00; 
-  margin: 0 8px; 
-} 
+  #timer { 
+    font-size: 14px; 
+    color: #ffcc00; 
+    margin: 0 8px; 
+  } 
 
-/* HEADER */ 
-header { 
-  text-align: center; 
-  padding: 10px; 
-  background: #001f5c; 
-} 
+  .dash { 
+    margin: 0 6px; 
+    color: #ffcc00; 
+  } 
 
-input { 
-  width: 60%; 
-  padding: 8px; 
-  margin: 5px; 
-  border-radius: 8px; 
-  border: none; 
-  text-align: center; 
-} 
+  header { 
+    text-align: center; 
+    padding: 10px; 
+    background: #001f5c; 
+  } 
 
-/* BUTTONS */ 
-.container { 
-  padding: 10px; 
-} 
+  input { 
+    width: 45%; 
+    padding: 8px; 
+    margin: 5px; 
+    border-radius: 8px; 
+    border: none; 
+    text-align: center; 
+    font-size: 16px; 
+  } 
 
-.team { 
-  background: #0050d4; 
-  border-radius: 15px; 
-  padding: 15px; 
-  margin-bottom: 10px; 
-} 
+  .container { 
+    padding: 10px; 
+  } 
 
-.buttons { 
-  display: grid; 
-  grid-template-columns: 1fr 1fr; 
-  gap: 8px; 
-} 
+  .team { 
+    background: #0050d4; 
+    border-radius: 15px; 
+    padding: 15px; 
+    margin-bottom: 10px; 
+  } 
 
-button { 
-  padding: 14px; 
-  border-radius: 10px; 
-  border: none; 
-} 
+  .buttons { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 8px; 
+  } 
 
-.goal { background: #ff5252; color: white; } 
-.point { background: #ffcc00; color: black; } 
+  button { 
+    padding: 14px; 
+    font-size: 14px; 
+    border-radius: 10px; 
+    border: none; 
+  } 
 
-.undo { background: orange; width: 100%; margin-top: 10px; } 
-.reset { background: #333; color: white; width: 100%; margin-top: 5px; } 
+  .goal { background: #ff5252; color: white; } 
+  .point { background: #ffcc00; color: black; } 
+  .wide { background: #b0bec5; } 
+  .free { background: #64b5f6; } 
+  .fortyfive { background: #9575cd; } 
 
-/* LOG */ 
-#log { 
-  background: white; 
-  color: black; 
-  border-radius: 10px; 
-  padding: 10px; 
-  max-height: 160px; 
-  overflow-y: auto; 
-  margin-top: 10px; 
-} 
+  .undo { 
+    background: #ffb300; 
+    color: black; 
+    width: 100%; 
+    margin-top: 10px; 
+  } 
 
-#log div { 
-  padding: 4px 0; 
-  border-bottom: 1px solid #ddd; 
-} 
+  .reset { 
+    background: #263238; 
+    color: white; 
+    width: 100%; 
+    margin-top: 5px; 
+  } 
+
+  #log { 
+    background: white; 
+    color: black; 
+    border-radius: 10px; 
+    padding: 10px; 
+    max-height: 160px; 
+    overflow-y: auto; 
+    font-size: 13px; 
+    margin-top: 10px; 
+  } 
 </style> 
 </head> 
 
 <body> 
 
-<!-- SCOREBOARD --> 
+<!-- RTÉ SCOREBOARD --> 
 <div class="scoreboard"> 
+
   <div class="team-side"> 
     <img src="tullylish.png" class="logo"> 
     <span>Tullylish</span> 
@@ -122,13 +141,14 @@ button {
   <div class="score-middle"> 
     <span id="scoreA">0-0</span> 
     <span id="timer">00:00</span> 
-    - 
+    <span class="dash">-</span> 
     <span id="scoreB">0-0</span> 
   </div> 
 
   <div class="team-side"> 
     <span id="teamBNameDisplay">Team B</span> 
   </div> 
+
 </div> 
 
 <header> 
@@ -138,7 +158,6 @@ button {
     <button onclick="startTimer()">Start</button> 
     <button onclick="pauseTimer()">Pause</button> 
     <button onclick="resetTimer()">Reset</button> 
-    <button onclick="toggleHalf()">2nd Half</button> 
   </div> 
 </header> 
 
@@ -149,6 +168,9 @@ button {
     <div class="buttons"> 
       <button class="goal" onclick="addScore('A','goal')">Goal</button> 
       <button class="point" onclick="addScore('A','point')">Point</button> 
+      <button class="wide" onclick="addScore('A','wide')">Wide</button> 
+      <button class="free" onclick="addScore('A','free')">Free</button> 
+      <button class="fortyfive" onclick="addScore('A','45')">45</button> 
     </div> 
   </div> 
 
@@ -157,6 +179,9 @@ button {
     <div class="buttons"> 
       <button class="goal" onclick="addScore('B','goal')">Goal</button> 
       <button class="point" onclick="addScore('B','point')">Point</button> 
+      <button class="wide" onclick="addScore('B','wide')">Wide</button> 
+      <button class="free" onclick="addScore('B','free')">Free</button> 
+      <button class="fortyfive" onclick="addScore('B','45')">45</button> 
     </div> 
   </div> 
 
@@ -171,11 +196,12 @@ button {
 
 let score = { A:{goals:0,points:0}, B:{goals:0,points:0} }; 
 let history = []; 
+
 let seconds = 0; 
 let interval = null; 
 let half = 1; 
 
-/* TIMER */ 
+// TIMER 
 function startTimer() { 
   if (!interval) { 
     interval = setInterval(() => { 
@@ -202,13 +228,7 @@ function updateTimer() {
   document.getElementById("timer").innerText = `${m}:${s}`; 
 } 
 
-/* HALF */ 
-function toggleHalf() { 
-  half = half === 1 ? 2 : 1; 
-  logEvent(half === 1 ? "First Half" : "Second Half"); 
-} 
-
-/* SCORE */ 
+// SCORE 
 function addScore(team, type) { 
   history.push(JSON.parse(JSON.stringify(score))); 
 
@@ -216,12 +236,10 @@ function addScore(team, type) {
   if (type === 'point') score[team].points++; 
 
   updateDisplay(); 
-
-  const name = team === 'A' ? "Tullylish" : getTeamB(); 
-  logEvent(name + " " + type); 
+  logEvent(`${team === 'A' ? 'Tullylish' : getTeamB()} ${type}`); 
 } 
 
-/* DISPLAY */ 
+// DISPLAY 
 function updateDisplay() { 
   document.getElementById("scoreA").innerText = 
     `${score.A.goals}-${score.A.points}`; 
@@ -237,30 +255,23 @@ function getTeamB() {
   return document.getElementById("teamBName").value || "Team B"; 
 } 
 
-/* UNDO */ 
+// UNDO 
 function undo() { 
   if (history.length > 0) { 
     score = history.pop(); 
     updateDisplay(); 
-    logEvent("Undo"); 
   } 
 } 
 
-/* LOG (bulletproof) */ 
+// LOG 
 function logEvent(text) { 
-  const log = document.getElementById("log"); 
-  if (!log) return; 
-
+  let log = document.getElementById("log"); 
   let time = document.getElementById("timer").innerText; 
-  let period = half === 1 ? "1H" : "2H"; 
 
-  const entry = document.createElement("div"); 
-  entry.textContent = `[${time} ${period}] ${text}`; 
-
-  log.prepend(entry); 
+  log.innerHTML = `<div>[${time}] ${text}</div>` + log.innerHTML; 
 } 
 
-/* RESET */ 
+// RESET MATCH 
 function resetMatch() { 
   score = { A:{goals:0,points:0}, B:{goals:0,points:0} }; 
   history = []; 
@@ -269,10 +280,8 @@ function resetMatch() {
   updateTimer(); 
 } 
 
-/* INIT */ 
 updateDisplay(); 
 updateTimer(); 
-logEvent("Match Ready"); 
 
 </script> 
 
