@@ -9,14 +9,29 @@
   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #0b3d2e;
+    background: #0a2a66; /* deep blue */
     color: white;
   }
 
   header {
-    text-align: center;
-    padding: 10px;
-    background: #06251c;
+  text-align: center;
+  padding: 10px;
+  background: #061a40;
+  color: #ffd600; /* makes text yellow */
+  }
+
+  .teamA-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .teamA-header img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
   }
 
   input {
@@ -39,10 +54,11 @@
     padding: 6px 10px;
     border-radius: 8px;
     border: none;
+    background: #ffcc00; color: black;
+    color: black;
   }
 
   .half {
-    margin-top: 5px;
     font-size: 14px;
     opacity: 0.9;
   }
@@ -52,10 +68,12 @@
   }
 
   .team {
-    background: #145c43;
+    background:#0047cc; /* brighter pitch-side blue */
     border-radius: 15px;
     padding: 15px;
     margin-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    border: 2px solid #ffcc00;
   }
 
   .score {
@@ -77,14 +95,26 @@
     border: none;
   }
 
+  /* Action buttons */
   .goal { background: #ff5252; color: white; }
-  .point { background: #ffd166; color: black; }
-  .wide { background: #9e9e9e; }
-  .free { background: #4dabf7; }
-  .fortyfive { background: #b197fc; }
+  .point { background: #ffcc00; color: black; }
+  .wide { background: #b0bec5; }
+  .free { background: #64b5f6; }
+  .fortyfive { background: #9575cd; }
 
-  .undo { background: orange; width: 100%; margin-top: 10px; }
-  .reset { background: #333; color: white; width: 100%; margin-top: 5px; }
+  .undo {
+    background: #ffb300;
+    color: black;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .reset {
+    background: #263238;
+    color: white;
+    width: 100%;
+    margin-top: 5px;
+  }
 
   #log {
     background: white;
