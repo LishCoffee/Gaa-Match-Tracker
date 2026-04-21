@@ -14,35 +14,54 @@
   } 
 
   /* RTÉ SCOREBOARD */ 
-  .scoreboard { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    background: #002a80; 
-    padding: 12px; 
-    border-bottom: 3px solid #ffcc00; 
-    font-weight: bold; 
-  } 
+  .scoreboard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #002a80;
+  padding: 6px 8px; /* smaller padding */
+  border-bottom: 3px solid #ffcc00;
+}
 
-  .team-side { 
-    display: flex; 
-    align-items: center; 
-    gap: 6px; 
-    font-size: 14px; 
-  } 
+.team-side {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 25%;
+}
 
-  .logo { 
-    width: 26px; 
-    height: 26px; 
-    border-radius: 50%; 
-    object-fit: cover; 
-  } 
+.team-name {
+  font-size: 12px; /* smaller text */
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-  .score-middle { 
-    font-size: 26px; 
-    letter-spacing: 2px; 
-    color: white; 
-  } 
+.logo {
+  width: 20px; /* smaller logo */
+  height: 20px;
+  border-radius: 50%;
+}
+
+.score-center {
+  text-align: center;
+  width: 50%;
+}
+
+.score-line {
+  font-size: 22px; /* reduced from big size */
+  font-weight: bold;
+}
+
+.match-info {
+  font-size: 11px;
+  color: #ffcc00;
+}
+
+.dash {
+  margin: 0 4px;
+}
 
   #timer { 
     font-size: 14px; 
