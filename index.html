@@ -22,7 +22,7 @@
 }
 
 .teams-line {
-  font-size: 14px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 4px;
 }
@@ -132,6 +132,19 @@
     font-size: 13px; 
     margin-top: 10px; 
   } 
+
+  .teamA-wrap { 
+  display: flex; 
+  align-items: center; 
+  gap: 6px; 
+} 
+
+.team-logo { 
+  width: 26px; 
+  height: 26px; 
+  border-radius: 50%; 
+} 
+
 </style> 
 </head> 
 
@@ -147,7 +160,10 @@
   </div>
 
   <div class="score-line">
-    <span id="scoreA">0-0 (0)</span>
+    <div class="teamA-wrap"> 
+      <img src="icon.png" class="team-logo"> 
+      <span id="scoreA">0-0 (0)</span> 
+    </div> 
     <span class="dash">-</span>
     <span id="scoreB">0-0 (0)</span>
   </div>
@@ -333,12 +349,32 @@ function logEvent(text) {
 
 // RESET MATCH 
 function resetMatch() { 
-  score = { A:{goals:0,points:0}, B:{goals:0,points:0} }; 
+  // reset scores 
+  score = { A: { goals: 0, points: 0 }, B: { goals: 0, points: 0 } }; 
   history = []; 
+
+  // reset timer + half 
   seconds = 0; 
+  half = 1; 
+
+  // clear log 
+  const log = document.getElementById("log"); 
+  if (log) log.innerHTML = ""; 
+
+  // reset UI displays 
   updateDisplay(); 
   updateTimer(); 
+
+  const halfDisplay = document.getElementById("halfDisplay"); 
+  if (halfDisplay) halfDisplay.innerText = "1H"; 
+
+  const teamBDisplay = document.getElementById("teamBNameDisplay"); 
+  if (teamBDisplay) teamBDisplay.innerText = getTeamB(); 
+
+  // optional: confirm reset in log 
+  logEvent("APP RESET - NEW MATCH READY"); 
 } 
+
 
 updateDisplay(); 
 updateTimer(); 
