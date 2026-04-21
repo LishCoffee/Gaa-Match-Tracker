@@ -342,23 +342,26 @@ function formatScore(t) {
 
   
 // DISPLAY 
-function updateDisplay() {
-  let aTotal = (score.A.goals * 3) + score.A.points + (score.A.twos * 2);
-  let bTotal = (score.B.goals * 3) + score.B.points + (score.B.twos * 2);
+function updateDisplay() { 
 
-  document.getElementById("scoreA").innerText =
-    `${score.A.goals}-${score.A.points} (${aTotal})`;
+  let aPointsDisplay = score.A.points + (score.A.twos * 2); 
+  let bPointsDisplay = score.B.points + (score.B.twos * 2); 
 
-  document.getElementById("scoreB").innerText =
-    `${score.B.goals}-${score.B.points} (${bTotal})`;
+  let aTotal = (score.A.goals * 3) + aPointsDisplay; 
+  let bTotal = (score.B.goals * 3) + bPointsDisplay; 
 
-  document.getElementById("teamBNameDisplay").innerText =
-    getTeamB();
+  document.getElementById("scoreA").innerText = 
+    `${score.A.goals}-${aPointsDisplay} (${aTotal})`; 
 
-  document.getElementById("halfDisplay").innerText =
-  half === 1 ? "1H" : "2H";
-  
-}
+  document.getElementById("scoreB").innerText = 
+    `${score.B.goals}-${bPointsDisplay} (${bTotal})`; 
+
+  document.getElementById("teamBNameDisplay").innerText = 
+    getTeamB(); 
+
+  document.getElementById("halfDisplay").innerText = 
+    half === 1 ? "1H" : "2H"; 
+} 
 
 // Toggle Half
 function toggleHalf() { 
