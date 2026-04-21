@@ -306,30 +306,19 @@ function updateTimer() {
   document.getElementById("timer").innerText = `${m}:${s}`; 
 } 
 
-// VIBRATE
-function vibrate(type = "short") { 
-  if (!navigator.vibrate) return; // not supported on some devices 
-
-  if (type === "goal") { 
-    navigator.vibrate([200, 100, 200]); // stronger pattern 
-  } else { 
-    navigator.vibrate(100); // short tap 
-  } 
-} 
 
 // SCORE 
 function addScore(team, type) { 
   history.push(JSON.parse(JSON.stringify(score))); 
 
-  if (type === 'goal') { 
-    score[team].goals++; 
-    vibrate("goal"); 
-  } else if (type === 'point') { 
-    score[team].points++; 
-    vibrate("short"); 
-  } else { 
-    vibrate("short"); 
-  } 
+  if (type === 'goal') score[team].goals++; 
+  if (type === 'point') score[team].points++; 
+
+  updateDisplay(); 
+
+  const name = team === 'A' ? "Tullylish" : getTeamB(); 
+  logEvent(name + " " + type); 
+} 
 
   updateDisplay(); 
   logEvent(`${team === 'A' ? 'Tullylish' : getTeamB()} ${type}`); 
