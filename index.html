@@ -208,8 +208,12 @@
 </div> 
 
 <script> 
-
-let score = { A:{goals:0,points:0}, B:{goals:0,points:0} }; 
+  
+let score = { 
+  A:{goals:0,points:0}, 
+  B:{goals:0,points:0} 
+};
+  
 let history = []; 
 
 let seconds = 0; 
@@ -251,9 +255,16 @@ function addScore(team, type) {
   if (type === 'point') score[team].points++; 
 
   updateDisplay(); 
-  logEvent(`${team === 'A' ? 'Tullylish' : getTeamB()} ${type}`); 
+  logEvent(`${team === 'A' ? 'Tullylish' : getTeamB()} ${type} | HT:${half}`); 
 } 
 
+// Format Score
+function formatScore(t) { 
+  let total = t.goals * 3 + t.points; 
+  return `${t.goals}-${t.points} (${total})`; 
+} 
+
+  
 // DISPLAY 
 function updateDisplay() {
   let aTotal = score.A.goals * 3 + score.A.points;
@@ -273,15 +284,24 @@ function updateDisplay() {
   
 }
 
-function toggleHalf() {
-  half = half === 1 ? "1H" : "2H";
+// Toggle Half
+function toggleHalf() { 
+  if (half === 1) { 
+    // save half-time score snapshot 
+    halfScores = JSON.parse(JSON.stringify(score)); 
 
-  document.getElementById("halfDisplay").innerText =
-  half === 1 ? "1H" : "2H";
+    logEvent(`HALF TIME: Tullylish ${formatScore(score.A)} - ${formatScore(score.B)} Team B`); 
+    half = 2; 
 
-  logEvent(half === 1 ? "First Half" : "Second Half");
-    
-}
+  } else { 
+    logEvent(`FULL TIME: Tullylish ${formatScore(score.A)} - ${formatScore(score.B)} Team B`); 
+    half = 1; 
+  } 
+
+  const display = document.getElementById("halfDisplay"); 
+  if (display) display.innerText = half === 1 ? "1H" : "2H"; 
+} 
+
   
 
 function getTeamB() { 
@@ -298,11 +318,18 @@ function undo() {
 
 // LOG 
 function logEvent(text) { 
-  let log = document.getElementById("log"); 
-  let time = document.getElementById("timer").innerText; 
+  const log = document.getElementById("log"); 
+  if (!log) return; 
 
-  log.innerHTML = `<div>[${time}] ${text}</div>` + log.innerHTML; 
+  let time = document.getElementById("timer").innerText; 
+  let period = half === 1 ? "1H" : "2H"; 
+
+  const entry = document.createElement("div"); 
+  entry.textContent = `[${time} ${period}] ${text}`; 
+
+  log.prepend(entry); 
 } 
+
 
 // RESET MATCH 
 function resetMatch() { 
