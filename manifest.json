@@ -1,6 +1,6 @@
 {
   "name": "GAA Match Tracker",
-  "short_name": "GAA Tracker",
+  "short_name": "GAA Lish Tracker",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#002a80",
