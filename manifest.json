@@ -1,0 +1,20 @@
+{
+  "name": "Coffee Rewards",
+  "short_name": "Coffee",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0d47a1",
+  "theme_color": "#0d47a1",
+  "icons": [
+    {
+      "src": "/Coffee-App/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/Coffee-App/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
