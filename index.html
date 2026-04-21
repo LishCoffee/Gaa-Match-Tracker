@@ -350,14 +350,14 @@ function updateDisplay() {
   let aTotal = (score.A.goals * 3) + aPointsDisplay; 
   let bTotal = (score.B.goals * 3) + bPointsDisplay; 
 
-  let aTwosText = score.A.twos > ? `(2P:${score.A.twos})` : ""; 
-  let bTwosText = score.A.twos > ? `(2P:${score.A.twos})` : ""; 
+  let aTwosText = score.A.twos > 0 ? `(2P:${score.A.twos})` : ""; 
+  let bTwosText = score.A.twos > 0 ? `(2P:${score.A.twos})` : ""; 
 
   document.getElementById("scoreA").innerText = 
-    `${score.A.goals}-${aPointsDisplay} (${aTotal})`; 
+    `${score.A.goals}-${aPointsDisplay} (${aTotal})${aTwosText} `; 
 
   document.getElementById("scoreB").innerText = 
-    `${score.B.goals}-${bPointsDisplay} (${bTotal})`; 
+    `${score.B.goals}-${bPointsDisplay} (${bTotal})${bTwosText}`; 
 
   document.getElementById("teamBNameDisplay").innerText = 
     getTeamB(); 
