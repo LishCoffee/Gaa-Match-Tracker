@@ -350,6 +350,9 @@ function updateDisplay() {
   let aTotal = (score.A.goals * 3) + aPointsDisplay; 
   let bTotal = (score.B.goals * 3) + bPointsDisplay; 
 
+  let aTwosText = score.A.twos > ? `(2P:${score.A.twos})` : ""; 
+  let bTwosText = score.A.twos > ? `(2P:${score.A.twos})` : ""; 
+
   document.getElementById("scoreA").innerText = 
     `${score.A.goals}-${aPointsDisplay} (${aTotal})`; 
 
