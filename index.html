@@ -200,6 +200,11 @@
   border-radius: 50%; 
 } 
 
+.two {
+  background: #00e676;
+  color: black;
+}
+
 </style> 
 </head> 
 
@@ -247,7 +252,8 @@
     <h3>Tullylish</h3> 
     <div class="buttons"> 
       <button class="goal" onclick="addScore('A','goal')">Goal</button> 
-      <button class="point" onclick="addScore('A','point')">Point</button> 
+      <button class="point" onclick="addScore('A','point')">Point</button>
+      <button class="two" onclick="addScore('A','two')">2 Pointer</button>
       <button class="wide" onclick="addScore('A','wide')">Wide</button> 
       <button class="free" onclick="addScore('A','free')">Free</button> 
       <button class="fortyfive" onclick="addScore('A','45')">45</button> 
@@ -258,7 +264,8 @@
     <h3 id="teamBTitle">Team B</h3> 
     <div class="buttons"> 
       <button class="goal" onclick="addScore('B','goal')">Goal</button> 
-      <button class="point" onclick="addScore('B','point')">Point</button> 
+      <button class="point" onclick="addScore('B','point')">Point</button>
+      <button class="two" onclick="addScore('B','two')">2 Pointer</button>
       <button class="wide" onclick="addScore('B','wide')">Wide</button> 
       <button class="free" onclick="addScore('B','free')">Free</button> 
       <button class="fortyfive" onclick="addScore('B','45')">45</button> 
@@ -275,8 +282,8 @@
 <script> 
   
 let score = { 
-  A:{goals:0,points:0}, 
-  B:{goals:0,points:0} 
+  A:{goals:0,points:0, twos:0}, 
+  B:{goals:0,points:0, twos:0} 
 };
   
 let history = []; 
@@ -319,11 +326,12 @@ function addScore(team, type) {
 
   if (type === 'goal') score[team].goals++; 
   if (type === 'point') score[team].points++; 
+  if (type === 'two') score[team].twos++;
 
   updateDisplay(); 
 
   const name = team === 'A' ? "Tullylish" : getTeamB(); 
-  logEvent(name + " " + type); 
+  logEvent(name + " " + (type === 'two' ? "2-pointer" : type)); 
 } 
 
 
@@ -335,8 +343,8 @@ function formatScore(t) {
   
 // DISPLAY 
 function updateDisplay() {
-  let aTotal = score.A.goals * 3 + score.A.points;
-  let bTotal = score.B.goals * 3 + score.B.points;
+  let aTotal = score.A.goals * 3 + score.A.points + (score.A.twos * 2);
+  let bTotal = score.B.goals * 3 + score.B.points + (score.B.twos * 2);
 
   document.getElementById("scoreA").innerText =
     `${score.A.goals}-${score.A.points} (${aTotal})`;
