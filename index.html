@@ -218,11 +218,17 @@ function updateDisplay() {
   let aPoints = score.A.points + (score.A.twos * 2); 
   let bPoints = score.B.points + (score.B.twos * 2); 
 
+  let aTotal = (score.A.goals * 3) + aPoints; 
+  let bTotal = (score.B.goals * 3) + bPoints; 
+
+  let aTwos = score.A.twos > 0 ? ` (2P:${score.A.twos})` : ""; 
+  let bTwos = score.B.twos > 0 ? ` (2P:${score.B.twos})` : ""; 
+
   document.getElementById("scoreA").innerText = 
-    `${score.A.goals}-${aPoints} (${getTotal('A')})`; 
+    `${score.A.goals}-${aPoints} (${aTotal})${aTwos}`; 
 
   document.getElementById("scoreB").innerText = 
-    `${score.B.goals}-${bPoints} (${getTotal('B')})`; 
+    `${score.B.goals}-${bPoints} (${bTotal})${bTwos}`; 
 
   document.getElementById("halfDisplay").innerText = 
     half === 1 ? "1H" : "2H"; 
@@ -230,6 +236,7 @@ function updateDisplay() {
   document.getElementById("teamBNameDisplay").innerText = 
     getTeamB(); 
 } 
+
 
 // SCORE 
 function addScore(team, type) { 
