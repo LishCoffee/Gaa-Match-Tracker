@@ -89,11 +89,18 @@
   } 
 
   button { 
-    padding: 14px; 
+    padding: 10px; 
     font-size: 14px; 
-    border-radius: 10px; 
-    border: none; 
+    border-radius: 8px; 
+    border: none;
+    margin: 4px
   } 
+
+  button:last-child {
+    backfround: #ffcc00;
+    color: black;
+    font-weight: bold;
+  }
 
   .goal { background: #ff5252; color: white; } 
   .point { background: #ffcc00; color: black; } 
@@ -164,7 +171,8 @@
   <div> 
     <button onclick="startTimer()">Start</button> 
     <button onclick="pauseTimer()">Pause</button> 
-    <button onclick="resetTimer()">Reset</button> 
+    <button onclick="resetTimer()">Reset</button>
+    <button onclick="toggleHalf()">2nd Half</button>
   </div> 
 </header> 
 
@@ -260,10 +268,18 @@ function updateDisplay() {
   document.getElementById("teamBNameDisplay").innerText =
     getTeamB();
   
+}
+
+function toggleHalf() {
+  half = half === 1 ? "1H" : "2H";
+
   document.getElementById("halfDisplay").innerText =
   half === 1 ? "1H" : "2H";
-  
+
+  logEvent(half === 1 ? "First Half : "Second Half");
+    
 }
+  
 
 function getTeamB() { 
   return document.getElementById("teamBName").value || "Team B"; 
