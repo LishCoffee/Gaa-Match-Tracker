@@ -233,6 +233,8 @@ function toggleHalf(auto = false) {
 }
 
 function addScore(team, type) {
+    console.log("TEAM:", team, "TYPE:", type);
+  
   history.push(JSON.parse(JSON.stringify(score)));
 
   if (type === 'goal') score[team].goals++;
