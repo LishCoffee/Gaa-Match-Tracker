@@ -240,16 +240,19 @@ function addScore(team, type) {
 } 
 
 // DISPLAY 
-function updateDisplay() { 
-  document.getElementById("scoreA").innerText = 
-    `${score.A.goals}-${score.A.points}`; 
+function updateDisplay() {
+  let aTotal = score.A.goals * 3 + score.A.points;
+  let bTotal = score.B.goals * 3 + score.B.points;
 
-  document.getElementById("scoreB").innerText = 
-    `${score.B.goals}-${score.B.points}`; 
+  document.getElementById("scoreA").innerText =
+    `${score.A.goals}-${score.A.points} (${aTotal})`;
 
-  document.getElementById("teamBNameDisplay").innerText = 
-    getTeamB(); 
-} 
+  document.getElementById("scoreB").innerText =
+    `${score.B.goals}-${score.B.points} (${bTotal})`;
+
+  document.getElementById("teamBNameDisplay").innerText =
+    getTeamB();
+}
 
 function getTeamB() { 
   return document.getElementById("teamBName").value || "Team B"; 
