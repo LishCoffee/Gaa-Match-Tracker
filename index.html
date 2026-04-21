@@ -343,8 +343,8 @@ function formatScore(t) {
   
 // DISPLAY 
 function updateDisplay() {
-  let aTotal = score.A.goals * 3 + score.A.points + (score.A.twos * 2);
-  let bTotal = score.B.goals * 3 + score.B.points + (score.B.twos * 2);
+  let aTotal = (score.A.goals * 3) + score.A.points + (score.A.twos * 2);
+  let bTotal = (score.B.goals * 3) + score.B.points + (score.B.twos * 2);
 
   document.getElementById("scoreA").innerText =
     `${score.A.goals}-${score.A.points} (${aTotal})`;
