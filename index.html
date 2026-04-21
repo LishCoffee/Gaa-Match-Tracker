@@ -264,12 +264,16 @@ function undo() {
   }
 }
 
-function logEvent(text) {
-  let log = document.getElementById("log");
-  let time = document.getElementById("timer").innerText;
-  let period = half === 1 ? "1H" : "2H";
-  log.innerHTML = `<div>[${time}] ${period} ${text}</div>` + log.innerHTML;
-}
+function logEvent(text) { 
+  const log = document.getElementById("log"); 
+  if (!log) return; 
+
+  let time = document.getElementById("timer").innerText; 
+  let period = half === 1 ? "1H" : "2H"; 
+
+  log.innerHTML = `<div>[${time} ${period}] ${text}</div>` + log.innerHTML; 
+} 
+
 
 function getTeamName(team) {
   if (team === 'A') return "Tullylish";
