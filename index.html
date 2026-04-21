@@ -282,8 +282,8 @@
 <script> 
   
 let score = { 
-  A:{goals:0,points:0, twos:0}, 
-  B:{goals:0,points:0, twos:0} 
+  A:{goals:0,points:0,twos:0}, 
+  B:{goals:0,points:0,twos:0} 
 };
   
 let history = []; 
@@ -410,7 +410,9 @@ function logEvent(text) {
 // RESET MATCH 
 function resetMatch() { 
   // reset scores 
-  score = { A: { goals: 0, points: 0 }, B: { goals: 0, points: 0 } }; 
+  score = { A: {goals:0,points:0,twos:0}, 
+            B: {goals:0,points:0,twos:0} 
+          }; 
   history = []; 
 
   // reset timer + half 
