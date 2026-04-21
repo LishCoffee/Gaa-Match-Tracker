@@ -1,12 +1,6 @@
 <!DOCTYPE html> 
 <html lang="en"> 
-<head>
-  <link rel="icon" href="icon.png">
-<link rel="apple-touch-icon" href="icon.png">
-<meta name="theme-color" content="#002a80">
-  
-<link rel="manifest" href="manifest.json">
-  
+<head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <title>GAA Match Tracker</title> 
@@ -19,93 +13,22 @@
     color: white; 
   } 
 
-  /* RTÉ SCOREBOARD */ 
-.scoreboard { 
-  background: #002a80; 
-  padding: 10px; 
-  text-align: center; 
-  border-bottom: 3px solid #ffcc00; 
-} 
-
-/* each line */ 
-.row { 
-  margin: 4px 0; 
-} 
-
-/* TEAM NAMES */ 
-.teams { 
-  display: flex; 
-  justify-content: space-between; 
-  font-size: 13px; 
-  font-weight: bold; 
-} 
-
-/* SCORE */ 
-.score { 
-  font-size: 32px; 
-  font-weight: bold; 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  gap: 10px; 
-} 
-
-/* TIMER */ 
-.meta { 
-  font-size: 13px; 
-  color: #ffcc00; 
-} 
-
-/* LOGO */ 
-.logo { 
-  width: 20px; 
-  height: 20px; 
-  border-radius: 50%; 
-  margin-right: 4px; 
-} 
-
-/* TEAM GROUP */ 
-.team { 
-  display: flex; 
-  align-items: center; 
-  gap: 5px; 
-} 
-
-.dash { 
-  font-size: 22px; 
-} 
-
-.teams-line {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 4px;
-}
-
-.vs {
-  margin: 0 6px;
-  opacity: 0.7;
-}
-
-.score-line {
-  font-size: 40px; /* 🔥 BIG score */
-  font-weight: bold;
-  letter-spacing: 1px;
-  margin-bottom: 4px;
-}
-
-.match-info {
-  font-size: 13px;
-  color: #ffcc00;
-}
-
-  #timer { 
-    font-size: 14px; 
-    color: #ffcc00; 
-    margin: 0 8px; 
+  .scoreboard { 
+    background: #002a80; 
+    padding: 10px; 
+    text-align: center; 
+    border-bottom: 3px solid #ffcc00; 
   } 
 
-  .dash { 
-    margin: 0 6px; 
+  .row { margin: 4px 0; } 
+
+  .score { 
+    font-size: 28px; 
+    font-weight: bold; 
+  } 
+
+  .meta { 
+    font-size: 13px; 
     color: #ffcc00; 
   } 
 
@@ -121,13 +44,11 @@
     margin: 5px; 
     border-radius: 8px; 
     border: none; 
-    text-a8lign: center; 
+    text-align: center; 
     font-size: 16px; 
   } 
 
-  .container { 
-    padding: 10px; 
-  } 
+  .container { padding: 10px; } 
 
   .team { 
     background: #0050d4; 
@@ -143,29 +64,22 @@
   } 
 
   button { 
-    padding: 16px; 
-    font-size: 15px; 
-    border-radius: 12px; 
-    border: none;
-    margin: 4px;
-    font-weight: bold;
+    padding: 14px; 
+    font-size: 14px; 
+    border-radius: 10px; 
+    border: none; 
+    font-weight: bold; 
   } 
-
-  button:last-child {
-    backfround: #ffcc00;
-    color: black;
-    font-weight: bold;
-  }
 
   .goal { background: #ff5252; color: white; } 
   .point { background: #ffcc00; color: black; } 
+  .two { background: #00e676; color: black; } 
   .wide { background: #b0bec5; } 
   .free { background: #64b5f6; } 
   .fortyfive { background: #9575cd; } 
 
   .undo { 
-    background: #ffb300; 
-    color: black; 
+    background: orange; 
     width: 100%; 
     margin-top: 10px; 
   } 
@@ -187,52 +101,26 @@
     font-size: 13px; 
     margin-top: 10px; 
   } 
-
-  .teamA-wrap { 
-  display: flex; 
-  align-items: center; 
-  gap: 6px; 
-} 
-
-.team-logo { 
-  width: 26px; 
-  height: 26px; 
-  border-radius: 50%; 
-} 
-
-.two {
-  background: #00e676;
-  color: black;
-}
-
 </style> 
 </head> 
 
 <body> 
 
-<!-- RTÉ SCOREBOARD --> 
+<!-- SCOREBOARD --> 
 <div class="scoreboard"> 
-
-  <div class="row teams"> 
-    <span class="team"> 
-      <img src="icon.png" class="logo"> 
-      Tullylish 
-    </span> 
-
-    <span class="team" id="teamBNameDisplay">Team B</span> 
+  <div class="row"> 
+    <strong>Tullylish</strong> vs <span id="teamBNameDisplay">Team B</span> 
   </div> 
 
   <div class="row score"> 
-    <span id="scoreA">0-0 (0)</span> 
-    <span class="dash">-</span> 
+    <span id="scoreA">0-0 (0)</span> - 
     <span id="scoreB">0-0 (0)</span> 
   </div> 
 
   <div class="row meta"> 
-    <span id="timer">00:00</span> 
+    <span id="timer">00:00</span> | 
     <span id="halfDisplay">1H</span> 
   </div> 
-
 </div> 
 
 <header> 
@@ -241,8 +129,8 @@
   <div> 
     <button onclick="startTimer()">Start</button> 
     <button onclick="pauseTimer()">Pause</button> 
-    <button onclick="resetTimer()">Reset</button>
-    <button onclick="toggleHalf()">2nd Half</button>
+    <button onclick="resetTimer()">Reset</button> 
+    <button onclick="toggleHalf()">2nd Half</button> 
   </div> 
 </header> 
 
@@ -252,8 +140,8 @@
     <h3>Tullylish</h3> 
     <div class="buttons"> 
       <button class="goal" onclick="addScore('A','goal')">Goal</button> 
-      <button class="point" onclick="addScore('A','point')">Point</button>
-      <button class="two" onclick="addScore('A','two')">2 Pointer</button>
+      <button class="point" onclick="addScore('A','point')">Point</button> 
+      <button class="two" onclick="addScore('A','two')">2 Pointer</button> 
       <button class="wide" onclick="addScore('A','wide')">Wide</button> 
       <button class="free" onclick="addScore('A','free')">Free</button> 
       <button class="fortyfive" onclick="addScore('A','45')">45</button> 
@@ -264,8 +152,8 @@
     <h3 id="teamBTitle">Team B</h3> 
     <div class="buttons"> 
       <button class="goal" onclick="addScore('B','goal')">Goal</button> 
-      <button class="point" onclick="addScore('B','point')">Point</button>
-      <button class="two" onclick="addScore('B','two')">2 Pointer</button>
+      <button class="point" onclick="addScore('B','point')">Point</button> 
+      <button class="two" onclick="addScore('B','two')">2 Pointer</button> 
       <button class="wide" onclick="addScore('B','wide')">Wide</button> 
       <button class="free" onclick="addScore('B','free')">Free</button> 
       <button class="fortyfive" onclick="addScore('B','45')">45</button> 
@@ -276,18 +164,16 @@
   <button class="reset" onclick="resetMatch()">Reset</button> 
 
   <div id="log"></div> 
-
 </div> 
 
 <script> 
-  
+
 let score = { 
   A:{goals:0,points:0,twos:0}, 
   B:{goals:0,points:0,twos:0} 
-};
-  
-let history = []; 
+}; 
 
+let history = []; 
 let seconds = 0; 
 let interval = null; 
 let half = 1; 
@@ -319,6 +205,31 @@ function updateTimer() {
   document.getElementById("timer").innerText = `${m}:${s}`; 
 } 
 
+// TOTAL CALC 
+function getTotal(team) { 
+  return (score[team].goals * 3) + 
+         score[team].points + 
+         (score[team].twos * 2); 
+} 
+
+// DISPLAY 
+function updateDisplay() { 
+
+  let aPoints = score.A.points + (score.A.twos * 2); 
+  let bPoints = score.B.points + (score.B.twos * 2); 
+
+  document.getElementById("scoreA").innerText = 
+    `${score.A.goals}-${aPoints} (${getTotal('A')})`; 
+
+  document.getElementById("scoreB").innerText = 
+    `${score.B.goals}-${bPoints} (${getTotal('B')})`; 
+
+  document.getElementById("halfDisplay").innerText = 
+    half === 1 ? "1H" : "2H"; 
+
+  document.getElementById("teamBNameDisplay").innerText = 
+    getTeamB(); 
+} 
 
 // SCORE 
 function addScore(team, type) { 
@@ -326,66 +237,39 @@ function addScore(team, type) {
 
   if (type === 'goal') score[team].goals++; 
   if (type === 'point') score[team].points++; 
-  if (type === 'two') score[team].twos++;
+  if (type === 'two') score[team].twos++; 
 
   updateDisplay(); 
 
   const name = team === 'A' ? "Tullylish" : getTeamB(); 
-  logEvent(name + " " + (type === 'two' ? "2-pointer" : type)); 
+  logEvent(`${name} ${type === 'two' ? '2 Pointer' : type}`); 
 } 
 
-
-function formatScore(t) { 
-  let total = t.goals * 3 + t.points; 
-  return `${t.goals}-${t.points} (${total})`; 
-} 
-
-  
-// DISPLAY 
-function updateDisplay() { 
-
-  let aPointsDisplay = score.A.points + (score.A.twos * 2); 
-  let bPointsDisplay = score.B.points + (score.B.twos * 2); 
-
-  let aTotal = (score.A.goals * 3) + aPointsDisplay; 
-  let bTotal = (score.B.goals * 3) + bPointsDisplay; 
-
-  let aTwosText = score.A.twos > 0 ? `(2P:${score.A.twos})` : ""; 
-  let bTwosText = score.B.twos > 0 ? `(2P:${score.B.twos})` : ""; 
-
-  document.getElementById("scoreA").innerText = 
-    `${score.A.goals}-${aPointsDisplay} (${aTotal})${aTwosText} `; 
-
-  document.getElementById("scoreB").innerText = 
-    `${score.B.goals}-${bPointsDisplay} (${bTotal})${bTwosText}`; 
-
-  document.getElementById("teamBNameDisplay").innerText = 
-    getTeamB(); 
-
-  document.getElementById("halfDisplay").innerText = 
-    half === 1 ? "1H" : "2H"; 
-} 
-
-// Toggle Half
+// HALF / FULL TIME 
 function toggleHalf() { 
+
   if (half === 1) { 
-    // save half-time score snapshot 
-    halfScores = JSON.parse(JSON.stringify(score)); 
-
-    logEvent(`HALF TIME: Tullylish ${formatScore(score.A)} - ${formatScore(score.B)} Team B`); 
+    logEvent(`HALF TIME: Tullylish ${formatScore(score.A)} - ${getTeamB()} ${formatScore(score.B)}`); 
     half = 2; 
-
   } else { 
-    logEvent(`FULL TIME: Tullylish ${formatScore(score.A)} - ${formatScore(score.B)} Team B`); 
+    logEvent(`FULL TIME: Tullylish ${formatScore(score.A)} - ${getTeamB()} ${formatScore(score.B)}`); 
     half = 1; 
   } 
 
-  const display = document.getElementById("halfDisplay"); 
-  if (display) display.innerText = half === 1 ? "1H" : "2H"; 
+  updateDisplay(); 
 } 
 
-  
+// FORMAT SCORE FOR LOG 
+function formatScore(t) { 
+  let points = t.points + (t.twos * 2); 
+  return `${t.goals}-${points} (${getTotalScore(t)})`; 
+} 
 
+function getTotalScore(t) { 
+  return (t.goals * 3) + t.points + (t.twos * 2); 
+} 
+
+// TEAM B 
 function getTeamB() { 
   return document.getElementById("teamBName").value || "Team B"; 
 } 
@@ -401,48 +285,32 @@ function undo() {
 // LOG 
 function logEvent(text) { 
   const log = document.getElementById("log"); 
-  if (!log) return; 
 
-  let time = document.getElementById("timer").innerText; 
-  let period = half === 1 ? "1H" : "2H"; 
+  const time = document.getElementById("timer").innerText; 
+  const period = half === 1 ? "1H" : "2H"; 
 
-  const entry = document.createElement("div"); 
-  entry.textContent = `[${time} ${period}] ${text}`; 
+  const div = document.createElement("div"); 
+  div.textContent = `[${time} ${period}] ${text}`; 
 
-  log.prepend(entry); 
+  log.prepend(div); 
 } 
 
-
-// RESET MATCH 
+// RESET 
 function resetMatch() { 
-  // reset scores 
-  score = { A: {goals:0,points:0,twos:0}, 
-            B: {goals:0,points:0,twos:0} 
-          }; 
-  history = []; 
+  score = { 
+    A:{goals:0,points:0,twos:0}, 
+    B:{goals:0,points:0,twos:0} 
+  }; 
 
-  // reset timer + half 
+  history = []; 
   seconds = 0; 
   half = 1; 
 
-  // clear log 
-  const log = document.getElementById("log"); 
-  if (log) log.innerHTML = ""; 
+  document.getElementById("log").innerHTML = ""; 
 
-  // reset UI displays 
   updateDisplay(); 
   updateTimer(); 
-
-  const halfDisplay = document.getElementById("halfDisplay"); 
-  if (halfDisplay) halfDisplay.innerText = "1H"; 
-
-  const teamBDisplay = document.getElementById("teamBNameDisplay"); 
-  if (teamBDisplay) teamBDisplay.innerText = getTeamB(); 
-
-  // optional: confirm reset in log 
-  logEvent("APP RESET - NEW MATCH READY"); 
 } 
-
 
 updateDisplay(); 
 updateTimer(); 
@@ -451,3 +319,4 @@ updateTimer();
 
 </body> 
 </html> 
+
