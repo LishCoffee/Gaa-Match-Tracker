@@ -306,21 +306,33 @@ function updateTimer() {
   document.getElementById("timer").innerText = `${m}:${s}`; 
 } 
 
-// SCORE 
-function addScore(team, type) { 
-  history.push(JSON.parse(JSON.stringify(score))); 
+// VIBRATE
+function vibrate(type = "short") { 
+  if (!navigator.vibrate) return; // not supported on some devices 
 
-  if (type === 'goal') score[team].goals++; 
-  if (type === 'point') score[team].points++; 
-
-  updateDisplay(); 
-  logEvent(`${team === 'A' ? 'Tullylish' : getTeamB()} ${type} | HT:${half}`); 
+  if (type === "goal") { 
+    navigator.vibrate([200, 100, 200]); // stronger pattern 
+  } else { 
+    navigator.vibrate(100); // short tap 
+  } 
 } 
 
-// Format Score
-function formatScore(t) { 
-  let total = t.goals * 3 + t.points; 
-  return `${t.goals}-${t.points} (${total})`; 
+// SCORE 
+function addScore(team, type) ) { 
+  history.push(JSON.parse(JSON.stringify(score))); 
+
+  if (type === 'goal') { 
+    score[team].goals++; 
+    vibrate("goal"); 
+  } else if (type === 'point') { 
+    score[team].points++; 
+    vibrate("short"); 
+  } else { 
+    vibrate("short"); 
+  } 
+
+  updateDisplay(); 
+  logEvent(`${team === 'A' ? 'Tullylish' : getTeamB()} ${type}`); 
 } 
 
   
