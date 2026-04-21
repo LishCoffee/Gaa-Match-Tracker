@@ -272,18 +272,24 @@ function undo() {
 
 // LOG 
 function logEvent(text) { 
-  
+  console.log("LOG:", text); // �� debug line 
+
   const log = document.getElementById("log"); 
   const timer = document.getElementById("timer"); 
 
-  if (!log || !timer) return; 
+  if (!log) { 
+    console.error("Log element missing"); 
+    return; 
+  } 
 
-  let period = half === 1 ? "1H" : "2H"; 
+  let time = timer ? timer.innerText : "00:00"; 
+  let period = (typeof half !== "undefined" && half === 2) ? "2H" : "1H"; 
 
   log.innerHTML = 
-     `<div>[${timer.innerText} ${period}] ${text}</div>` + 
+    `<div>[${time} ${period}] ${text}</div>` + 
     log.innerHTML; 
 } 
+
 
 
 // RESET MATCH 
@@ -297,7 +303,7 @@ function resetMatch() {
 
 updateDisplay(); 
 updateTimer(); 
-  
+logEvent("TEST WORKING");
 </script> 
 
 </body> 
