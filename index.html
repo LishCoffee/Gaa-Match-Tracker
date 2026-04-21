@@ -14,12 +14,39 @@
   } 
 
   /* RTÉ SCOREBOARD */ 
-  .scoreboard {
-  background: #002a80;
-  border-bottom: 3px solid #ffcc00;
-  padding: 10px;
-  text-align: center;
-}
+  .scoreboard { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  background: #002a80; 
+  padding: 8px; 
+} 
+
+.score-center { 
+  flex: 1; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 10px; 
+} 
+
+.teamA-wrap, 
+.teamB-wrap { 
+  display: flex; 
+  align-items: center; 
+  gap: 6px; 
+} 
+
+.team-logo { 
+  width: 22px; 
+  height: 22px; 
+  border-radius: 50%; 
+} 
+
+.dash { 
+  font-size: 22px; 
+  font-weight: bold; 
+} 
 
 .teams-line {
   font-size: 20px;
@@ -159,13 +186,18 @@
     <span id="teamBNameDisplay" class="team-name">Team B</span>
   </div>
 
-  <div class="score-line">
+  <div class="score-center">
     <div class="teamA-wrap"> 
       <img src="icon.png" class="team-logo"> 
       <span id="scoreA">0-0 (0)</span> 
     </div> 
+    
     <span class="dash">-</span>
-    <span id="scoreB">0-0 (0)</span>
+    
+    <div class ="teamB-wrap">
+      <span id="scoreB">0-0 (0)</span>
+    </div>
+    
   </div>
 
   <div class="match-info">
