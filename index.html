@@ -14,52 +14,55 @@
   } 
 
   /* RTÉ SCOREBOARD */ 
- .scoreboard { 
-  display: flex; 
-  align-items: center; 
-  justify-content: space-between; 
+.scoreboard { 
   background: #002a80; 
-  padding: 8px; 
-} 
-
-.side { 
-  width: 25%; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  gap: 6px; 
-} 
-
-.logo { 
-  width: 22px; 
-  height: 22px; 
-  border-radius: 50%; 
-} 
-
-.team-name { 
-  font-size: 20px; 
-  font-weight: bold; 
-  white-space: nowrap; 
-} 
-
-.center { 
-  width: 50%; 
+  padding: 10px; 
   text-align: center; 
+  border-bottom: 3px solid #ffcc00; 
 } 
 
+/* each line */ 
+.row { 
+  margin: 4px 0; 
+} 
+
+/* TEAM NAMES */ 
+.teams { 
+  display: flex; 
+  justify-content: space-between; 
+  font-size: 13px; 
+  font-weight: bold; 
+} 
+
+/* SCORE */ 
 .score { 
-  font-size: 25px; 
+  font-size: 32px; 
   font-weight: bold; 
   display: flex; 
   justify-content: center; 
-  gap: 8px; 
   align-items: center; 
+  gap: 10px; 
 } 
 
+/* TIMER */ 
 .meta { 
-  font-size: 12px; 
+  font-size: 13px; 
   color: #ffcc00; 
-  margin-top: 2px; 
+} 
+
+/* LOGO */ 
+.logo { 
+  width: 20px; 
+  height: 20px; 
+  border-radius: 50%; 
+  margin-right: 4px; 
+} 
+
+/* TEAM GROUP */ 
+.team { 
+  display: flex; 
+  align-items: center; 
+  gap: 5px; 
 } 
 
 .dash { 
@@ -198,29 +201,25 @@
 <!-- RTÉ SCOREBOARD --> 
 <div class="scoreboard"> 
 
-  <div class="side"> 
-    <img src="icon.png" class="logo"> 
-    <div class="team-name">Tullylish</div> 
+  <div class="row teams"> 
+    <span class="team"> 
+      <img src="icon.png" class="logo"> 
+      Tullylish 
+    </span> 
+
+    <span class="team" id="teamBNameDisplay">Team B</span> 
   </div> 
 
-  <div class="center"> 
-    <div class="score"> 
-      <span id="scoreA">0-0 (0)</span> 
-      <span class="dash">-</span> 
-      <span id="scoreB">0-0 (0)</span> 
-    </div> 
-
-    <div class="meta"> 
-      <span id="timer">00:00</span> 
-      <span id="halfDisplay">1H</span> 
-    </div> 
+  <div class="row score"> 
+    <span id="scoreA">0-0 (0)</span> 
+    <span class="dash">-</span> 
+    <span id="scoreB">0-0 (0)</span> 
   </div> 
 
-  <div class="side"> 
-    <div class="team-name" id="teamBNameDisplay">Team B</div> 
+  <div class="row meta"> 
+    <span id="timer">00:00</span> 
+    <span id="halfDisplay">1H</span> 
   </div> 
-
-</div> 
 
 </div> 
 
