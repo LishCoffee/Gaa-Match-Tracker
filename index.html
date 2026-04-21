@@ -1,216 +1,207 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GAA Match Tracker</title>
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>GAA Match Tracker</title> 
 
-<style>
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #0a2a66; /* deep blue */
-    color: white;
-  }
+<style> 
+  body { 
+    margin: 0; 
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif; 
+    background: #0033a0; 
+    color: white; 
+  } 
 
-  header {
-  text-align: center;
-  padding: 10px;
-  background: #061a40;
-  color: #ffd600; /* makes text yellow */
-  }
+  /* RTÉ SCOREBOARD */ 
+  .scoreboard { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    background: #002a80; 
+    padding: 12px; 
+    border-bottom: 3px solid #ffcc00; 
+    font-weight: bold; 
+  } 
 
-  .teamA-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
+  .team-side { 
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+    font-size: 14px; 
+  } 
 
-  .teamA-header img {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
+  .logo { 
+    width: 26px; 
+    height: 26px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+  } 
 
-  input {
-    width: 45%;
-    padding: 8px;
-    margin: 5px;
-    border-radius: 8px;
-    border: none;
-    text-align: center;
-    font-size: 16px;
-  }
+  .score-middle { 
+    font-size: 26px; 
+    letter-spacing: 2px; 
+    color: white; 
+  } 
 
-  .timer {
-    font-size: 24px;
-    margin: 5px 0;
-  }
+  #timer { 
+    font-size: 14px; 
+    color: #ffcc00; 
+    margin: 0 8px; 
+  } 
 
-  .controls button {
-    margin: 3px;
-    padding: 6px 10px;
-    border-radius: 8px;
-    border: none;
-    background: #ffcc00; color: black;
-    color: black;
-  }
+  .dash { 
+    margin: 0 6px; 
+    color: #ffcc00; 
+  } 
 
-  .half {
-    font-size: 14px;
-    opacity: 0.9;
-  }
+  header { 
+    text-align: center; 
+    padding: 10px; 
+    background: #001f5c; 
+  } 
 
-  .container {
-    padding: 10px;
-  }
+  input { 
+    width: 45%; 
+    padding: 8px; 
+    margin: 5px; 
+    border-radius: 8px; 
+    border: none; 
+    text-align: center; 
+    font-size: 16px; 
+  } 
 
-  .team {
-    background:#0047cc; /* brighter pitch-side blue */
-    border-radius: 15px;
-    padding: 15px;
-    margin-bottom: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    border: 2px solid #ffcc00;
-  }
+  .container { 
+    padding: 10px; 
+  } 
 
-  .score {
-    text-align: center;
-    font-size: 22px;
-    margin-bottom: 10px;
-  }
+  .team { 
+    background: #0050d4; 
+    border-radius: 15px; 
+    padding: 15px; 
+    margin-bottom: 10px; 
+  } 
 
-  .buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
+  .buttons { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 8px; 
+  } 
 
-  button {
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 10px;
-    border: none;
-  }
+  button { 
+    padding: 14px; 
+    font-size: 14px; 
+    border-radius: 10px; 
+    border: none; 
+  } 
 
-  /* Action buttons */
-  .goal { background: #ff5252; color: white; }
-  .point { background: #ffcc00; color: black; }
-  .wide { background: #b0bec5; }
-  .free { background: #64b5f6; }
-  .fortyfive { background: #9575cd; }
+  .goal { background: #ff5252; color: white; } 
+  .point { background: #ffcc00; color: black; } 
+  .wide { background: #b0bec5; } 
+  .free { background: #64b5f6; } 
+  .fortyfive { background: #9575cd; } 
 
-  .undo {
-    background: #ffb300;
-    color: black;
-    width: 100%;
-    margin-top: 10px;
-  }
+  .undo { 
+    background: #ffb300; 
+    color: black; 
+    width: 100%; 
+    margin-top: 10px; 
+  } 
 
-  .reset {
-    background: #263238;
-    color: white;
-    width: 100%;
-    margin-top: 5px;
-  }
+  .reset { 
+    background: #263238; 
+    color: white; 
+    width: 100%; 
+    margin-top: 5px; 
+  } 
 
-  #log {
-    background: white;
-    color: black;
-    border-radius: 10px;
-    padding: 10px;
-    max-height: 160px;
-    overflow-y: auto;
-    font-size: 13px;
-    margin-top: 10px;
-  }
-</style>
-</head>
+  #log { 
+    background: white; 
+    color: black; 
+    border-radius: 10px; 
+    padding: 10px; 
+    max-height: 160px; 
+    overflow-y: auto; 
+    font-size: 13px; 
+    margin-top: 10px; 
+  } 
+</style> 
+</head> 
 
-<body>
+<body> 
 
-<header>
-  <link rel="icon" type="image/png" href="icon2.jpg">
-  <div class="teamA-header">
-    <img id="teamALogo" src="icon.png" alt="Tullylish">
-  </div>
-  <input id="teamAName" placeholder="Tullylish">
-  <input id="teamBName" placeholder="Team B">
+<!-- RTÉ SCOREBOARD --> 
+<div class="scoreboard"> 
 
-  <div class="timer" id="timer">00:00</div>
-  <div class="half" id="half">First Half</div>
+  <div class="team-side"> 
+    <img src="tullylish.png" class="logo"> 
+    <span>Tullylish</span> 
+  </div> 
 
-  <div class="controls">
-    <button onclick="startTimer()">Start</button>
-    <button onclick="pauseTimer()">Pause</button>
-    <button onclick="resetTimer()">Reset</button>
-    <button onclick="toggleHalf()">Half-Time</button>
-  </div>
-</header>
+  <div class="score-middle"> 
+    <span id="scoreA">0-0</span> 
+    <span id="timer">00:00</span> 
+    <span class="dash">-</span> 
+    <span id="scoreB">0-0</span> 
+  </div> 
 
-<div class="container">
+  <div class="team-side"> 
+    <span id="teamBNameDisplay">Team B</span> 
+  </div> 
 
-  <div class="team">
-    <div class="score" id="scoreA">0-0 (0)</div>
-    <div class="buttons">
-      <button class="goal" onclick="addScore('A','goal')">Goal</button>
-      <button class="point" onclick="addScore('A','point')">Point</button>
-      <button class="wide" onclick="addScore('A','wide')">Wide</button>
-      <button class="free" onclick="addScore('A','free')">Free</button>
-      <button class="fortyfive" onclick="addScore('A','45')">45</button>
-    </div>
-  </div>
+</div> 
 
-  <div class="team">
-    <div class="score" id="scoreB">0-0 (0)</div>
-    <div class="buttons">
-      <button class="goal" onclick="addScore('B','goal')">Goal</button>
-      <button class="point" onclick="addScore('B','point')">Point</button>
-      <button class="wide" onclick="addScore('B','wide')">Wide</button>
-      <button class="free" onclick="addScore('B','free')">Free</button>
-      <button class="fortyfive" onclick="addScore('B','45')">45</button>
-    </div>
-  </div>
+<header> 
+  <input id="teamBName" placeholder="Team B"> 
 
-  <button class="undo" onclick="undo()">Undo Last Action</button>
-  <button class="reset" onclick="resetMatch()">Reset Match</button>
+  <div> 
+    <button onclick="startTimer()">Start</button> 
+    <button onclick="pauseTimer()">Pause</button> 
+    <button onclick="resetTimer()">Reset</button> 
+  </div> 
+</header> 
 
-  <div id="log"></div>
+<div class="container"> 
 
-</div>
+  <div class="team"> 
+    <h3>Tullylish</h3> 
+    <div class="buttons"> 
+      <button class="goal" onclick="addScore('A','goal')">Goal</button> 
+      <button class="point" onclick="addScore('A','point')">Point</button> 
+      <button class="wide" onclick="addScore('A','wide')">Wide</button> 
+      <button class="free" onclick="addScore('A','free')">Free</button> 
+      <button class="fortyfive" onclick="addScore('A','45')">45</button> 
+    </div> 
+  </div> 
+
+  <div class="team"> 
+    <h3 id="teamBTitle">Team B</h3> 
+    <div class="buttons"> 
+      <button class="goal" onclick="addScore('B','goal')">Goal</button> 
+      <button class="point" onclick="addScore('B','point')">Point</button> 
+      <button class="wide" onclick="addScore('B','wide')">Wide</button> 
+      <button class="free" onclick="addScore('B','free')">Free</button> 
+      <button class="fortyfive" onclick="addScore('B','45')">45</button> 
+    </div> 
+  </div> 
+
+  <button class="undo" onclick="undo()">Undo</button> 
+  <button class="reset" onclick="resetMatch()">Reset</button> 
+
+  <div id="log"></div> 
+
+</div> 
 
 <script> 
+
 let score = { A:{goals:0,points:0}, B:{goals:0,points:0} }; 
 let history = []; 
 
 let seconds = 0; 
 let interval = null; 
 let half = 1; 
-const HALF_TIME = 2100; 
-
-// TEAM NAME (hard-wired A) 
-function getTeamName(team) { 
-  if (team === 'A') return "Tullylish"; 
-  const el = document.getElementById("teamBName"); 
-  return el ? el.value || "Team B" : "Team B"; 
-} 
 
 // TIMER 
-function updateTimer() { 
-  const timerEl = document.getElementById("timer"); 
-  if (!timerEl) return; 
-
-  let mins = String(Math.floor(seconds / 60)).padStart(2,'0'); 
-  let secs = String(seconds % 60).padStart(2,'0'); 
-  timerEl.innerText = `${mins}:${secs}`; 
-
-  if (seconds === HALF_TIME && half === 1) { 
-    toggleHalf(true); 
-  } 
-} 
-
 function startTimer() { 
   if (!interval) { 
     interval = setInterval(() => { 
@@ -228,46 +219,40 @@ function pauseTimer() {
 function resetTimer() { 
   pauseTimer(); 
   seconds = 0; 
-  half = 1; 
-  const halfEl = document.getElementById("half"); 
-  if (halfEl) halfEl.innerText = "First Half"; 
   updateTimer(); 
 } 
 
-function toggleHalf(auto=false) { 
-  half = half === 1 ? 2 : 1; 
-  const halfEl = document.getElementById("half"); 
-  if (halfEl) { 
-    halfEl.innerText = half === 1 ? "First Half" : "Second Half"; 
-  } 
-  logEvent(auto ? "Half-time reached" : "Half switched"); 
+function updateTimer() { 
+  let m = String(Math.floor(seconds/60)).padStart(2,'0'); 
+  let s = String(seconds%60).padStart(2,'0'); 
+  document.getElementById("timer").innerText = `${m}:${s}`; 
 } 
 
-// SCORE (safe) 
+// SCORE 
 function addScore(team, type) { 
-  if (!score[team]) return; 
-
   history.push(JSON.parse(JSON.stringify(score))); 
 
   if (type === 'goal') score[team].goals++; 
   if (type === 'point') score[team].points++; 
 
   updateDisplay(); 
-  logEvent(`${getTeamName(team)} ${type}`); 
+  logEvent(`${team === 'A' ? 'Tullylish' : getTeamB()} ${type}`); 
 } 
 
-// DISPLAY (safe) 
+// DISPLAY 
 function updateDisplay() { 
-  const aEl = document.getElementById("scoreA"); 
-  const bEl = document.getElementById("scoreB"); 
+  document.getElementById("scoreA").innerText = 
+    `${score.A.goals}-${score.A.points}`; 
 
-  if (!aEl || !bEl) return; 
+  document.getElementById("scoreB").innerText = 
+    `${score.B.goals}-${score.B.points}`; 
 
-  let aTotal = score.A.goals*3 + score.A.points; 
-  let bTotal = score.B.goals*3 + score.B.points; 
+  document.getElementById("teamBNameDisplay").innerText = 
+    getTeamB(); 
+} 
 
-  aEl.innerText = `${score.A.goals}-${score.A.points} (${aTotal})`; 
-  bEl.innerText = `${score.B.goals}-${score.B.points} (${bTotal})`; 
+function getTeamB() { 
+  return document.getElementById("teamBName").value || "Team B"; 
 } 
 
 // UNDO 
@@ -275,40 +260,31 @@ function undo() {
   if (history.length > 0) { 
     score = history.pop(); 
     updateDisplay(); 
-    logEvent("Undo"); 
   } 
 } 
 
-// LOG (safe) 
+// LOG 
 function logEvent(text) { 
-  const log = document.getElementById("log"); 
-  const timer = document.getElementById("timer"); 
+  let log = document.getElementById("log"); 
+  let time = document.getElementById("timer").innerText; 
 
-  if (!log || !timer) return; 
-
-  let period = half === 1 ? "1H" : "2H"; 
-  log.innerHTML = `<div>[${timer.innerText} ${period}] ${text}</div>` + log.innerHTML; 
+  log.innerHTML = `<div>[${time}] ${text}</div>` + log.innerHTML; 
 } 
 
-// RESET 
+// RESET MATCH 
 function resetMatch() { 
   score = { A:{goals:0,points:0}, B:{goals:0,points:0} }; 
   history = []; 
   seconds = 0; 
-  half = 1; 
-
-  const log = document.getElementById("log"); 
-  if (log) log.innerHTML = ""; 
-
   updateDisplay(); 
   updateTimer(); 
 } 
 
-// INIT 
 updateDisplay(); 
 updateTimer(); 
+
 </script> 
 
+</body> 
+</html> 
 
-</body>
-</html>
