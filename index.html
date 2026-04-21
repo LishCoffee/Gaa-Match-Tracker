@@ -27,6 +27,23 @@
     font-weight: bold; 
   } 
 
+  .team-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 22px;
+  font-weight: 800;
+  margin: 10px 0;
+}
+
+.team-logo-inline {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
   .meta { 
     font-size: 13px; 
     color: #ffcc00; 
@@ -137,7 +154,10 @@
 <div class="container"> 
 
   <div class="team"> 
-    <h3>Tullylish</h3> 
+    <h3 class="team-title">
+  <img src="icon.png" class="team-logo-inline">
+  Tullylish
+</h3>> 
     <div class="buttons"> 
       <button class="goal" onclick="addScore('A','goal')">Goal</button> 
       <button class="point" onclick="addScore('A','point')">Point</button> 
