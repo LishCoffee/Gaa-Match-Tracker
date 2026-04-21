@@ -272,13 +272,18 @@ function undo() {
 
 // LOG 
 function logEvent(text) { 
-  let log = document.getElementById("log"); 
-  let time = document.getElementById("timer").innerText; 
+  const log = document.getElementById("log"); 
+  const timer = document.getElementById("timer"); 
 
-  let period = half === 1 ? "1H" : "2H";
+  if (!log || !timer) return; 
 
-  log.innerHTML = `<div>[${time} &{period}] ${text}</div>` + log.innerHTML; 
+  let period = half === 1 ? "1H" : "2H"; 
+
+  log.innerHTML = 
+    `<div>[${timer.innerText} ${period}] ${text}</div>` + 
+    log.innerHTML; 
 } 
+
 
 // RESET MATCH 
 function resetMatch() { 
