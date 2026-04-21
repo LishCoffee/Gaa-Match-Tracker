@@ -200,7 +200,7 @@ let history = [];
 
 let seconds = 0; 
 let interval = null; 
-let half = 1; 
+let half = half === 1 ? 2 : 1;; 
 
 // TIMER 
 function startTimer() { 
