@@ -280,7 +280,7 @@ function logEvent(text) {
   let period = half === 1 ? "1H" : "2H"; 
 
   log.innerHTML = 
-    `<div>[${timer.innerText} ${period}] ${text}</div>` + 
+    <div>[${timer.innerText} ${period}] ${text}</div> + 
     log.innerHTML; 
 } 
 
