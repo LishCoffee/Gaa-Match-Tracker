@@ -371,25 +371,36 @@ function addScore(team, type) {
 // HALF / FULL TIME 
 function toggleHalf() { 
 
- if (half === 1) { 
+  if (half === 1) { 
 
-  generateReport("HALF TIME"); 
+    logEvent( 
+      `HALF TIME: Tullylish ${formatScore(score.A)} - ${getTeamB()} ${formatScore(score.B)}` 
+    ); 
 
-  half = 2; 
+    generateReport("HALF TIME"); // popup 
+    half = 2; 
 
-} else { 
+  } else { 
 
-  generateReport("FULL TIME"); 
+    logEvent( 
+      `FULL TIME: Tullylish ${formatScore(score.A)} - ${getTeamB()} ${formatScore(score.B)}` 
+    ); 
 
-  half = 1; 
-} 
+    generateReport("FULL TIME"); // popup 
+    half = 1; 
+  } 
 
+  updateDisplay(); 
 } 
 
 // FORMAT SCORE FOR LOG 
 function formatScore(t) { 
   let points = t.points + (t.twos * 2); 
-  return `${t.goals}-${points} (${getTotalScore(t)})`; 
+  let total = (t.goals * 3) + points; 
+
+  let twosText = t.twos > 0 ? ` (${t.twos})` : ""; 
+
+  return `${t.goals}-${points} (${total})${twosText}`; 
 } 
 
 function getTotalScore(t) { 
