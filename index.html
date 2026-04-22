@@ -187,7 +187,7 @@
 </div> 
 
 <header> 
-  <input id="teamBName" placeholder="Team B"> 
+  <input id="teamBName" placeholder="Team B" oninput="updateTeamB()"> 
 
   <div> 
     <button onclick="startTimer()">Start</button> 
@@ -233,6 +233,16 @@
 </div> 
 
 <script> 
+
+//UpdateTeamBName
+function updateTeamB() {
+  updateDisplay();
+
+  //also update team title inside buttons
+  section
+  const title = document.getElementById("teamBTitle");
+    if (title) title.innerText = getTeamB();
+}
 
 //Report
 function generateReport(type) { 
