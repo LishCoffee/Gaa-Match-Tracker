@@ -121,27 +121,38 @@
 } 
 
 .popup-content { 
-  background: white; 
-  color: black; 
+  background: #0033a0; /* Tullylish Blue" */ 
+  color: white; 
   padding: 20px; 
-  border-radius: 12px; 
-  width: 80%; 
-  max-width: 300px; 
-  text-align: center; 
+  border-radius: 14px; 
+  width: 85%; 
+  max-width: 320px; 
+  text-align: center;
+  border: 3px solid #ffcc00; /* yellow */
 } 
 
 .popup-content h2 { 
   margin-top: 0; 
+  color: #ffcc00;
 } 
 
 .popup-content button { 
   margin-top: 10px; 
-  padding: 10px; 
-  background: #002a80; 
-  color: white; 
+  padding: 10px;   
   border: none; 
   border-radius: 8px; 
+  font-weight: bold;
 } 
+
+.close-btn {
+  background: #263238;
+  color: white;
+}
+
+.share-btn {
+  background: #25D366; /* WhatsApp green */;
+  color: white;
+}
 
   #log { 
     background: white; 
@@ -232,13 +243,29 @@ function generateReport(type) {
   const aTotal = (score.A.goals * 3) + aPoints; 
   const bTotal = (score.B.goals * 3) + bPoints; 
 
-  document.getElementById("reportTitle").innerText = type + " REPORT"; 
+  const report = 
+`${type} REPORT 
 
-  document.getElementById("reportText").innerText = 
-`Tullylish: ${score.A.goals}-${aPoints} (${aTotal}) | 2P: ${score.A.twos} 
-${getTeamB()}: ${score.B.goals}-${bPoints} (${bTotal}) | 2P: ${score.B.twos}`; 
+Tullylish ${score.A.goals}-${aPoints} (${aTotal}) | 2P: ${score.A.twos} 
+${getTeamB()} ${score.B.goals}-${bPoints} (${bTotal}) | 2P: ${score.B.twos}`; 
+
+  lastReportText = report; 
+
+  document.getElementById("reportTitle").innerText = type + " REPORT"; 
+  document.getElementById("reportText").innerText = report; 
 
   document.getElementById("reportPopup").style.display = "flex"; 
+} 
+
+function shareReport() { 
+
+  if (!lastReportText) return; 
+
+  const encoded = encodeURIComponent(lastReportText); 
+
+const url = `https://wa.me/?text=${encoded}`; 
+
+  window.open(url, "_blank"); 
 } 
 
 function closePopup() { 
@@ -409,7 +436,9 @@ updateTimer();
   <div class="popup-content"> 
     <h2 id="reportTitle"></h2> 
     <pre id="reportText"></pre> 
-    <button onclick="closePopup()">Close</button> 
+
+    <button class="share-btn" onclick="shareReport()">Share to WhatsApp</button> 
+    <button class="close-btn" onclick="closePopup()">Close</button> 
   </div> 
 </div> 
 
