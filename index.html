@@ -197,14 +197,13 @@ function generateReport(type) {
   const aTotal = (score.A.goals * 3) + aPoints; 
   const bTotal = (score.B.goals * 3) + bPoints; 
 
-  const report = ` 
-=== ${type} REPORT === 
-Tullylish: ${score.A.goals}-${aPoints} (${aTotal}) | 2P: ${score.A.twos} 
-${getTeamB()}: ${score.B.goals}-${bPoints} (${bTotal}) | 2P: ${score.B.twos} 
-======================== 
-  `; 
+  const report =  
+`${type} REPORT
 
-  logEvent(report.trim()); 
+Tullylish: ${score.A.goals}-${aPoints} (${aTotal}) | 2P: ${score.A.twos} 
+${getTeamB()}: ${score.B.goals}-${bPoints} (${bTotal}) | 2P: ${score.B.twos} `; 
+
+  alert(report); 
 } 
 
 
