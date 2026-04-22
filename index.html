@@ -375,15 +375,13 @@ const scoreBEl = document.getElementById("scoreB");
 scoreAEl.style.color = "white"; 
 scoreBEl.style.color = "white"; 
 
-const board = document.querySelector(".scoreboard"); 
-
-if (aTotal > bTotal) { 
-  board.style.background = "#004d00"; // green tint 
+  if (aTotal > bTotal) { 
+  scoreAEl.style.color = "#ffcc00"; // Tullylish winning (yellow) 
 } else if (bTotal > aTotal) { 
-  board.style.background = "#660000"; // red tint 
-} else { 
-  board.style.background = "#002a80"; // default 
+  scoreBEl.style.color = "#00e676"; // Team B winning (green) 
 } 
+
+const board = document.querySelector(".scoreboard"); 
 
 } 
 
