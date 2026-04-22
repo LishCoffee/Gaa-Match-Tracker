@@ -188,6 +188,26 @@
 
 <script> 
 
+//Report
+function generateReport(type) { 
+
+  const aPoints = score.A.points + (score.A.twos * 2); 
+  const bPoints = score.B.points + (score.B.twos * 2); 
+
+  const aTotal = (score.A.goals * 3) + aPoints; 
+  const bTotal = (score.B.goals * 3) + bPoints; 
+
+  const report = ` 
+=== ${type} REPORT === 
+Tullylish: ${score.A.goals}-${aPoints} (${aTotal}) | 2P: ${score.A.twos} 
+${getTeamB()}: ${score.B.goals}-${bPoints} (${bTotal}) | 2P: ${score.B.twos} 
+======================== 
+  `; 
+
+  logEvent(report.trim()); 
+} 
+
+
 let score = { 
   A:{goals:0,points:0,twos:0}, 
   B:{goals:0,points:0,twos:0} 
@@ -275,15 +295,19 @@ function addScore(team, type) {
 // HALF / FULL TIME 
 function toggleHalf() { 
 
-  if (half === 1) { 
-    logEvent(`HALF TIME: Tullylish ${formatScore(score.A)} - ${getTeamB()} ${formatScore(score.B)}`); 
-    half = 2; 
-  } else { 
-    logEvent(`FULL TIME: Tullylish ${formatScore(score.A)} - ${getTeamB()} ${formatScore(score.B)}`); 
-    half = 1; 
-  } 
+ if (half === 1) { 
 
-  updateDisplay(); 
+  generateReport("HALF TIME"); 
+
+  half = 2; 
+
+} else { 
+
+  generateReport("FULL TIME"); 
+
+  half = 1; 
+} 
+
 } 
 
 // FORMAT SCORE FOR LOG 
