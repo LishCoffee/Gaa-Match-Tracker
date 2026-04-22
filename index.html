@@ -368,18 +368,12 @@ function updateDisplay() {
 
   document.getElementById("teamBTitle").innerText = getTeamB();
 
-  const scoreAEl = document.getElementById("scoreA"); 
+const scoreAEl = document.getElementById("scoreA"); 
 const scoreBEl = document.getElementById("scoreB"); 
 
 // reset first 
 scoreAEl.style.color = "white"; 
 scoreBEl.style.color = "white"; 
-
-if (aTotal > bTotal) { 
-  scoreAEl.style.color = "#ffcc00"; // Tullylish winning (yellow) 
-} else if (bTotal > aTotal) { 
-  scoreBEl.style.color = "#00e676"; // Team B winning (green) 
-} 
 
 const board = document.querySelector(".scoreboard"); 
 
