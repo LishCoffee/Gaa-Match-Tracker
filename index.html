@@ -6,6 +6,13 @@
 <title>GAA Match Tracker</title> 
 
 <style> 
+
+  html, body {
+  overscroll-behaviour: none;
+  height: 100%
+  overflow: hidden;
+  }
+  
   body { 
     margin: 0; 
     font-family: -apple-system, BlinkMacSystemFont, sans-serif; 
@@ -65,7 +72,11 @@
     font-size: 16px; 
   } 
 
-  .container { padding: 10px; } 
+  .container { 
+    padding: 10px;
+    height: calc(100vh - 140px); /*adjust if needed */
+    overflow-y: auto;  
+  } 
 
   .team { 
     background: #0050d4; 
@@ -452,6 +463,20 @@ function resetMatch() {
 
 updateDisplay(); 
 updateTimer(); 
+
+let startY = 0; 
+
+document.addEventListener("touchstart", function(e) { 
+  startY = e.touches[0].clientY; 
+}, { passive: true }); 
+
+document.addEventListener("touchmove", function(e) { 
+  let currentY = e.touches[0].clientY; 
+
+  if (window.scrollY === 0 && currentY > startY) { 
+    e.preventDefault(); // 🚫 blocks pull refresh 
+  } 
+}, { passive: false }); 
 
 </script> 
 
