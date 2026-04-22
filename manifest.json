@@ -1,7 +1,7 @@
 {
   "name": "GAA Match Tracker",
   "short_name": "Tullylish GAA Tracker",
-  "start_url": ".",
+  "start_url": "/GAA-Match-Tracker/",
   "display": "standalone",
   "background_color": "#002a80",
   "theme_color": "#002a80",
